@@ -1,19 +1,21 @@
-def go(n):
-    return n >= 25
+def go(a,b):
+    return a+b>=58
 
+def p1(a,b):
+    return go(a+1,b) or go(a,b+1) or go(a+b,b) or go(a,a+b)
 
-def petya_win(n):
-    return go(n + 1) or go(n * 2)
+def p1l(a,b):
+    return go(a+1,b) or go(a,b+1) or go(a+b,b) or go(a,a+b)
 
+def v1(a,b):
+    return p1(a+1,b) and p1(a,b+1) and p1(a+b,b) and p1(a,a+b) and not p1l(a,b)
 
-def vanya_win(n):
-    return petya_win(n + 1) and petya_win(n * 2) and not (petya_win(n))
+def v1l(a,b):
+    return p1(a+1,b) or p1(a,b+1) or p1(a+b,b) or p1(a,a+b)
 
+def p2(a,b):
+    return v1(a+1,b) or v1(a,b+1) or v1(a+b,b) or v1(a,a+b)
 
-def petya_win2(n):
-    return (vanya_win(n + 1) or vanya_win(n * 2)) and not (vanya_win(n))
-
-
-for i in range(1, 24):
-    if petya_win2(i):
+for i in range(1,51+1):
+    if p2(6,i):
         print(i)
